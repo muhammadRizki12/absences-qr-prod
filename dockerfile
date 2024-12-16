@@ -1,5 +1,5 @@
 # Gunakan PHP versi terbaru
-FROM php:8.1-apache
+FROM php:8.2-apache
 
 # Install dependensi yang dibutuhkan
 RUN apt-get update && apt-get install -y \
