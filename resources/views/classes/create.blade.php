@@ -84,7 +84,7 @@
                             <input type="text" name="class_name" id="class_name" class="form-control">
                         </div>
 
-                        <div>
+                        {{-- <div>
                             <label for="latitude" class="form-label">Latitude</label>
                             <input type="text" name="latitude" id="latitude" class="form-control">
                         </div>
@@ -92,7 +92,7 @@
                         <div>
                             <label for="longitude" class="form-label">Longitude</label>
                             <input type="text" name="longitude" id="longitude" class="form-control">
-                        </div>
+                        </div> --}}
 
                         <div>
                             <button class="mt-3 btn btn-primary" type="submit">Save</button>

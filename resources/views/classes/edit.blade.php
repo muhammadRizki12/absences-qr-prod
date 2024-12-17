@@ -117,7 +117,7 @@
                                         value="{{ $class->class_name }}" class="form-control" required>
                                 </div>
 
-                                <div>
+                                {{-- <div>
                                     <label for="latitude" class="form-label">Latitude</label>
                                     <input type="text" name="latitude" id="latitude" class="form-control"
                                         value="{{ $class->latitude }}">
@@ -127,7 +127,7 @@
                                     <label for="longitude" class="form-label">Longitude</label>
                                     <input type="text" name="longitude" id="longitude" class="form-control"
                                         value="{{ $class->longitude }}">
-                                </div>
+                                </div> --}}
                                 <!-- Submit Button -->
                                 <div class="d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary mt-3">Update</button>

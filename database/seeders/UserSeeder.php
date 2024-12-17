@@ -26,6 +26,6 @@ class UserSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        UserModel::factory()->count(5)->create(); // Membuat 10 data dummy
+        // UserModel::factory()->count(5)->create(); // Membuat 10 data dummy
     }
 }

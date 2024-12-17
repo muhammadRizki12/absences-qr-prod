@@ -141,8 +141,8 @@
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Nama Kelas</th>
-                                    <th scope="col">Latitude</th>
-                                    <th scope="col">Longitude</th>
+                                    {{-- <th scope="col">Latitude</th>
+                                    <th scope="col">Longitude</th> --}}
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -151,8 +151,8 @@
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $class->class_name }}</td>
-                                        <td>{{ $class->latitude }}</td>
-                                        <td>{{ $class->longitude }}</td>
+                                        {{-- <td>{{ $class->latitude }}</td>
+                                        <td>{{ $class->longitude }}</td> --}}
                                         <td>
                                             <!-- Tombol Detail (ikon mata) -->
                                             <a href="{{ route('class.show', $class->id) }}"

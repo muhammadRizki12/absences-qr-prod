@@ -138,13 +138,26 @@ class AbsenceController extends Controller
         $longitudeCurrent = $request->longitude;
 
         // Koordinat lokasi kelas (dari database)
-        $longitudeClass = floatval($class->longitude);
-        $latitudeClass = floatval($class->latitude);
+        // -7.009443254448746, 107.55150421608026
+        // -6.946593,107.593823
+        $latitudeClass = -6.946593;
+        $longitudeClass = 107.593823;
+        // $longitudeClass = doubleval($class->longitude);
+        // $latitudeClass = doubleval($class->latitude);
 
         // Fungsi untuk menghitung jarak
         $distance = $this->distance($latitudeClass, $longitudeClass, $latitudeCurrent, $longitudeCurrent);
 
-        if ($distance >= 5) {
+        // test
+        // dd("
+        // latitude current: $latitudeCurrent\n
+        // longitude current: $longitudeCurrent\n
+        // latitude class: $latitudeClass\n
+        // longitude class: $longitudeClass\n
+        // radius: $distance
+        // ");
+
+        if ($distance >= 300) {
             return response()->json([
                 'message' => 'Anda di luar jangkauan!',
                 'redirect_url' => '/users/absences/scan-qr',
