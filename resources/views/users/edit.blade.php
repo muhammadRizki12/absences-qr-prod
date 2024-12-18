@@ -155,9 +155,9 @@
                                 <div class="mb-3">
                                     <label for="gender" class="form-label">Jenis Kelamin:</label>
                                     <select id="gender" name="gender" class="form-select" required>
-                                        <option value="Male" {{ $user->gender == 'Male' ? 'selected' : '' }}>Laki-Laki
+                                        <option value="Laki-laki" {{ $user->gender == 'Male' ? 'selected' : '' }}>Laki-laki
                                         </option>
-                                        <option value="Female" {{ $user->gender == 'Female' ? 'selected' : '' }}>
+                                        <option value="Perempuan" {{ $user->gender == 'Female' ? 'selected' : '' }}>
                                             Perempuan</option>
                                     </select>
                                 </div>

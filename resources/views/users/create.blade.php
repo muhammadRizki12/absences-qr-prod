@@ -127,6 +127,10 @@
 
                                 <!-- Nama -->
                                 <div class="mb-3">
+                                    <label for="nip" class="form-label">NIP</label>
+                                    <input type="text" id="nip" name="nip" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
                                     <label for="username" class="form-label">Nama</label>
                                     <input type="text" id="username" name="username" class="form-control" required>
                                 </div>
@@ -147,8 +151,8 @@
                                 <div class="mb-3">
                                     <label for="gender" class="form-label">Jenis Kelamin</label>
                                     <select id="gender" name="gender" class="form-select" required>
-                                        <option value="laki-laki">Laki-labki</option>
-                                        <option value="perempuan">Perempuan</option>
+                                        <option value="Laki-Laki">Laki-laki</option>
+                                        <option value="Perempuan">Perempuan</option>
                                     </select>
                                 </div>
 
