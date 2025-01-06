@@ -12,6 +12,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 </head>
 
+<style>
+    /* Styling untuk sidebar */
+    .bg-sidebar {
+        background-color: #0d6efd;
+        color: white;
+        padding: 20px;
+    }
+
+    /* Styling untuk link di sidebar */
+    .bg-sidebar .nav-link {
+        color: white;
+    }
+</style>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -49,16 +62,17 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar for Desktop Only -->
-            <div class="col-md-3 bg-light p-3 d-none d-md-block">
+            <div class="col-md-3 bg-sidebar p-3 d-none d-md-block">
+
                 <!-- Tampilkan hanya di perangkat desktop -->
-                <h5 class="text-primary">HOME</h5>
+                <h5 >HOME</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="/dashboard-guru">Dashboard</a>
                     </li>
                 </ul>
 
-                <h5 class="text-primary mt-3">MENU</h5>
+                <h5 >MENU</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="/users/absences/scan-qr">Scan QR Absensi</a>
@@ -68,6 +82,69 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/users/schedules">Jadwal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
                     </li>
                 </ul>
             </div>

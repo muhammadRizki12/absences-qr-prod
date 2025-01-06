@@ -40,7 +40,7 @@
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-4 col-sm-8 col-10">
                 <div class="bg-primary text-white rounded-4 p-4">
-                    <h5 class="text-center">Create Account</h5>
+                    <h5 class="text-center">Buat Akun</h5>
 
                     <!-- Menampilkan error validasi -->
                     @if ($errors->any())

@@ -9,6 +9,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
+<style>
+    /* Styling untuk sidebar */
+    .bg-sidebar {
+        background-color: #0d6efd;
+        color: white;
+        padding: 20px;
+    }
+
+    /* Styling untuk link di sidebar */
+    .bg-sidebar .nav-link {
+        color: white;
+    }
+</style>
 <body>
    <!-- Navbar -->
    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -22,7 +35,7 @@
                 <ul class="navbar-nav ms-auto">
                     <!-- MENU Section moved here for mobile -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Dashboard</a>
+                        <a class="nav-link" href="/dashboard-guru">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/users/absences/scan-qr">Scan QR Absensi</a>
@@ -33,6 +46,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/users/schedules">Jadwal</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-danger text-white" href="{{ route('auth.logout') }}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -41,16 +59,16 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar for Desktop Only -->
-            <div class="col-md-3 bg-light p-3 d-none d-md-block">
+            <div class="col-md-3 bg-sidebar p-3 d-none d-md-block">
                 <!-- Tampilkan hanya di perangkat desktop -->
-                <h5 class="text-primary">HOME</h5>
+                <h5>HOME</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Dashboard</a>
+                        <a class="nav-link" href="/dashboard-guru">Dashboard</a>
                     </li>
                 </ul>
 
-                <h5 class="text-primary mt-3">MENU</h5>
+                <h5 >MENU</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Scan QR Absensi</a>
@@ -60,6 +78,69 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Jadwal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
                     </li>
                 </ul>
             </div>

@@ -8,6 +8,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Data Guru</title>
     <style>
+         /* Styling untuk sidebar */
+         .bg-sidebar {
+            background-color:#0d6efd;
+            color: white;
+            padding: 20px;
+        }
+
+        /* Styling untuk link di sidebar */
+        .bg-sidebar .nav-link {
+            color: white;
+        }
         body {
             background-color: #f8f9fa;
         }
@@ -86,8 +97,9 @@
         <div class="row">
 
             <!-- Sidebar -->
-            <div class="col-md-3 bg-light p-3 d-none d-md-block">
-                <h5 class="text-primary">HOME</h5>
+            <div class="col-md-3 bg-sidebar p-3 d-none d-md-block">
+
+                <h5>HOME</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link active" href="/about">About</a>
@@ -97,7 +109,7 @@
                     </li>
                 </ul>
 
-                <h5 class="text-primary mt-3">ADMIN</h5>
+                <h5>ADMIN</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="/users">Data Guru</a>
@@ -110,6 +122,57 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/absences">Laporan Kehadiran</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
                     </li>
                 </ul>
             </div>

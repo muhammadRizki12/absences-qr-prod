@@ -140,8 +140,8 @@ class AbsenceController extends Controller
         // Koordinat lokasi kelas (dari database)
         // -7.009443254448746, 107.55150421608026
         // -6.946593,107.593823
-        $latitudeClass = -6.946593;
-        $longitudeClass = 107.593823;
+        $latitudeClass = -7.036147;
+        $longitudeClass = 107.535459;
         // $longitudeClass = doubleval($class->longitude);
         // $latitudeClass = doubleval($class->latitude);
 

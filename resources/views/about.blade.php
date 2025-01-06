@@ -9,6 +9,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
+     .bg-db {
+            background-image: url('{{ asset('assets/image/bgdb.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+     /* Styling untuk sidebar */
+     .bg-sidebar {
+            background-color:#0d6efd;
+            color: white;
+            padding: 20px;
+        }
+
+        /* Styling untuk link di sidebar */
+        .bg-sidebar .nav-link {
+            color: white;
+        }
         body {
             background-color: #f8f9fa;
         }
@@ -83,8 +100,9 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3 bg-light p-3 d-none d-md-block">
-                <h5 class="text-primary">HOME</h5>
+            <div class="col-md-3 bg-sidebar p-3 d-none d-md-block">
+
+                <h5>HOME</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link active" href="/about">About</a>
@@ -94,7 +112,7 @@
                     </li>
                 </ul>
 
-                <h5 class="text-primary mt-3">ADMIN</h5>
+                <h5>ADMIN</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="/users">Data Guru</a>
@@ -108,11 +126,59 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/absences">Laporan Kehadiran</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
                 </ul>
             </div>
 
             <!-- Main Content -->
-            <div class="col-12 col-md-9 p-3">
+            <div class="col-12 col-md-9 p-3 bg-db">
                 <h3>Visi dan Misi</h3>
                 <div class="card mb-4">
                     <div class="card-header bg-success text-white text-center">

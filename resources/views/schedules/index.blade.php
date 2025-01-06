@@ -9,6 +9,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Jadwal</title>
     <style>
+        /* Styling untuk sidebar */
+        .bg-sidebar {
+            background-color: #0d6efd;
+            color: white;
+            padding: 20px;
+        }
+
+        /* Styling untuk link di sidebar */
+        .bg-sidebar .nav-link {
+            color: white;
+        }
+
         body {
             background-color: #f8f9fa;
         }
@@ -88,8 +100,9 @@
         <div class="row">
 
             <!-- Sidebar -->
-            <div class="col-md-3 bg-light p-3 d-none d-md-block">
-                <h5 class="text-primary">HOME</h5>
+            <div class="col-md-3 bg-sidebar p-3 d-none d-md-block">
+
+                <h5>HOME</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link active" href="/about">About</a>
@@ -99,7 +112,7 @@
                     </li>
                 </ul>
 
-                <h5 class="text-primary mt-3">ADMIN</h5>
+                <h5>ADMIN</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="/users">Data Guru</a>
@@ -113,6 +126,51 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/absences">Laporan Kehadiran</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
                 </ul>
             </div>
 
@@ -122,11 +180,11 @@
                     <h3 class="mb-4">Jadwal</h3>
 
                     @if (session('msg'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{{ session('msg') }}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
-                        </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ session('msg') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                    </div>
                     @endif
 
                     <!-- Tombol "Tambah Schedule" di atas tabel -->
@@ -152,30 +210,31 @@
                             </thead>
                             <tbody>
                                 @foreach ($schedules as $schedule)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $schedule->study }}</td>
-                                        <td>{{ $schedule->day }}</td>
-                                        <td>{{ substr($schedule->entry_time, 0, 5) }} -
-                                            {{ substr($schedule->out_time, 0, 5) }}</td>
-                                        <td>{{ $schedule->user->username }}</td>
-                                        <td>{{ $schedule->class->class_name }}</td>
-                                        <td>
-                                            <a href="{{ route('schedule.edit', $schedule->id) }}"
-                                                class="btn btn-warning btn-sm">
-                                                <i class="fas fa-edit"></i> Edit
-                                            </a>
-                                            <form action="{{ route('schedule.destroy', $schedule->id) }}"
-                                                method="POST" style="display:inline;"
-                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash-alt"></i> Hapus
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $schedule->study }}</td>
+                                    <td>{{ $schedule->day }}</td>
+                                    <td>{{ substr($schedule->entry_time, 0, 5) }} -
+                                        {{ substr($schedule->out_time, 0, 5) }}
+                                    </td>
+                                    <td>{{ $schedule->user->username }}</td>
+                                    <td>{{ $schedule->class->class_name }}</td>
+                                    <td>
+                                        <a href="{{ route('schedule.edit', $schedule->id) }}"
+                                            class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <form action="{{ route('schedule.destroy', $schedule->id) }}"
+                                            method="POST" style="display:inline;"
+                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash-alt"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
