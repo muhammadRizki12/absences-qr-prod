@@ -12,13 +12,13 @@
     <style>
         /* Background gambar pada seluruh halaman */
         .bg-db {
-            background-image: url('{{ asset('assets/image/bgdb.jpg') }}');
+            background-image: url('{{ asset(' assets/image/bgdb.jpg') }}');
             background-size: cover;
             background-position: center;
             height: 100vh;
         }
 
-        
+
 
         /* Styling untuk sidebar */
         .bg-sidebar {
@@ -195,6 +195,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="mt-4 text-center">
+                        <a class="nav-link btn btn-primary" href="/absences/today" style="color: white;">
+                            <i class="fas fa-arrow-right"></i> Lihat Selengkapnya
+                        </a>
+                    </div>
+
+
                 </div>
             </div>
 

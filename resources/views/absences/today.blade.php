@@ -182,15 +182,11 @@
             <!-- Main Content -->
             <div class="col-12 col-md-9">
                 <div class="container">
-                    <h3 class="mb-4">Laporan Kehadiran</h3>
+                    <h3 class="mb-4">Laporan Kehadiran Hari ini</h3>
 
                     <!-- Filter Form -->
-                    <form method="GET" action="{{ route('absence.index') }}" class="mb-4">
+                    <form method="GET" action="{{ route('absence.today') }}" class="mb-4">
                         <div class="row">
-                            <div class="col-md-3">
-                                <input type="date" name="date" class="form-control"
-                                    value="{{ request('date') }}" placeholder="Tanggal">
-                            </div>
                             <div class="col-md-3">
                                 <input type="text" name="teacher_name" class="form-control"
                                     value="{{ request('teacher_name') }}" placeholder="Nama Guru">
@@ -223,25 +219,21 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Tanggal</th>
-                                    <th scope="col">Guru</th>
-                                    <th scope="col">Mata Pelajaran</th>
-                                    <th scope="col">Kelas</th>
-                                    <th scope="col">Waktu</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Aksi</th>
+                                    <th>Nama Guru</th>
+                                    <th>Mata Pelajaran</th>
+                                    <th>Nama Kelas</th>
+                                    <th>Waktu</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($absences as $absence)
                                     <tr>
-                                        <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $absence->schedule->day }}, {{ $absence->date }}</td>
                                         <td>{{ $absence->schedule->user->username }}</td>
                                         <td>{{ $absence->schedule->study }}</td>
                                         <td>{{ $absence->schedule->class->class_name }}</td>
-                                        <td>{{ substr($absence->time, 0, 5) }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($absence->absence_datetime)->format('H:i') }}</td>
                                         <td>{{ $absence->status }}</td>
                                         <td>
                                             <!-- Tombol Edit (ikon pensil) -->
