@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AbsenceModel;
+use App\Models\ScheduleModel;
 use App\Models\UserModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -79,9 +80,25 @@ class AuthController extends Controller
     public function dashboardadmin()
     {
 
+        // get timeDate now
+        $currentTime = Carbon::now();
 
-        $users = UserModel::where('role', 'guru')->get();
-        $usersCount = $users->count();
+        // set locale to indonesian
+        Carbon::setLocale('id');
+
+        // get day in locale indonesian
+        $currentDay = $currentTime->translatedFormat('l');
+
+        // get users today
+        $usersToday = ScheduleModel::with('user')
+            ->whereHas('user', function ($query) {
+                $query->where('role', 'guru');
+            })
+            ->where('day', $currentDay)
+            ->get();
+
+        // users count
+        $usersCount = $usersToday->count();
 
         // Mendapatkan tanggal sekarang
         $currentDate = Carbon::now()->toDateString(); // Format: "YYYY-MM-DD"

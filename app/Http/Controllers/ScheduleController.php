@@ -11,9 +11,37 @@ use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $schedules = ScheduleModel::all();
+        // query builder untuk mendapatkan data schedule
+        $query = ScheduleModel::query();
+
+        // Filter by study
+        if ($request->filled('study')) {
+            $query->where('study', 'like', '%' . $request->study . '%');
+        }
+
+        // Filter by day
+        if ($request->filled('day')) {
+            $query->where('day', 'like', '%' . $request->day . '%');
+        }
+
+        // Filter by teacher name
+        if ($request->filled('teacher_name')) {
+            $query->whereHas('user', function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->teacher_name . '%');
+            });
+        }
+
+        // Filter by class name
+        if ($request->filled('class_name')) {
+            $query->whereHas('class', function ($query) use ($request) {
+                $query->where('class_name', 'like', '%' . $request->class_name . '%');
+            });
+        }
+
+        // Get data schedule
+        $schedules = $query->get();
         return view('schedules.index', compact('schedules'));
     }
 

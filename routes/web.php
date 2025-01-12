@@ -76,8 +76,10 @@ Route::middleware(['admin'])->group(function () {
 
     // Abcences
     Route::get('/absences', [AbsenceController::class, 'index'])->name('absence.index');
+    Route::get('/absences/today', [AbsenceController::class, 'today'])->name('absence.today');
     Route::get('/absences/{id}/edit', [AbsenceController::class, 'edit'])->name('absence.edit');
     Route::patch('/absences/{id}', [AbsenceController::class, 'update'])->name('absence.update');
+    Route::delete('/absences/{id}', [AbsenceController::class, 'destroy'])->name('absence.destroy');
 
     // Schedules
     Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedule.index');

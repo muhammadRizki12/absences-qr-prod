@@ -28,9 +28,9 @@ class AbsenceController extends Controller
         }
 
         // Filter by subject (mata pelajaran)
-        if ($request->filled('subject')) {
+        if ($request->filled('study')) {
             $query->whereHas('schedule', function ($query) use ($request) {
-                $query->where('study', 'like', '%' . $request->subject . '%');
+                $query->where('study', 'like', '%' . $request->study . '%');
             });
         }
 
@@ -55,6 +55,47 @@ class AbsenceController extends Controller
         return view('absences.index', compact('absences'));
     }
 
+    public function today(Request $request)
+    {
+        // query builder
+        $query = AbsenceModel::query();
+
+        // get date now
+        $today = Carbon::now();
+        // get by date
+        $query->whereDate('absence_datetime', $today)->get();
+
+        // Filter by teacher name (assuming 'username' is the teacher's name in users table)
+        if ($request->filled('teacher_name')) {
+            $query->whereHas('schedule.user', function ($query) use ($request) {
+                $query->where('username', 'like', '%' . $request->teacher_name . '%');
+            });
+        }
+
+        // Filter by subject (mata pelajaran)
+        if ($request->filled('study')) {
+            $query->whereHas('schedule', function ($query) use ($request) {
+                $query->where('study', 'like', '%' . $request->study . '%');
+            });
+        }
+
+        // Filter by class
+        if ($request->filled('class_name')) {
+            $query->whereHas('schedule.class', function ($query) use ($request) {
+                $query->where('class_name', 'like', '%' . $request->class_name . '%');
+            });
+        }
+
+        // Filter by status
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $absences = $query->get();
+
+        return view('absences.today', compact('absences'));
+    }
+
     public function edit($id)
     {
         $absence = AbsenceModel::findOrFail($id);
@@ -74,6 +115,16 @@ class AbsenceController extends Controller
         if (!$updateAbsence) return redirect()->route('absence.edit')->with('msg', 'Absence update failed!');
 
         return redirect()->route('absence.index')->with('msg', 'Absence updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $absence = AbsenceModel::findOrFail($id);
+        $deleteAbsence = $absence->delete();
+
+        if (!$deleteAbsence) return redirect()->route('absence.index')->with('msg', 'Absence delete failed!');
+
+        return redirect()->route('absence.index')->with('msg', 'Absence deleted successfully.');
     }
 
     public function userAbsence()

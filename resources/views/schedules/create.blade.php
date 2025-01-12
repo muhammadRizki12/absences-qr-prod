@@ -11,54 +11,55 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
-     /* Styling untuk sidebar */
-     .bg-sidebar {
-            background-color:#0d6efd;
-            color: white;
-            padding: 20px;
-        }
+    /* Styling untuk sidebar */
+    .bg-sidebar {
+        background-color: #0d6efd;
+        color: white;
+        padding: 20px;
+    }
 
-        /* Styling untuk link di sidebar */
-        .bg-sidebar .nav-link {
-            color: white;
-        }
-        body {
-            background-color: #f8f9fa;
-        }
+    /* Styling untuk link di sidebar */
+    .bg-sidebar .nav-link {
+        color: white;
+    }
 
-        .container {
-            margin-top: 20px;
-        }
+    body {
+        background-color: #f8f9fa;
+    }
 
-        .btn-container {
-            text-align: right;
-            margin-bottom: 10px;
-        }
+    .container {
+        margin-top: 20px;
+    }
 
-        .btn-icon {
-            padding: 5px 10px;
-            font-size: 18px;
-        }
+    .btn-container {
+        text-align: right;
+        margin-bottom: 10px;
+    }
 
-        table th,
-        table td {
-            vertical-align: middle;
-        }
+    .btn-icon {
+        padding: 5px 10px;
+        font-size: 18px;
+    }
 
-        .table thead {
-            background-color: #007bff;
-            color: white;
-        }
+    table th,
+    table td {
+        vertical-align: middle;
+    }
 
-        .table-responsive {
-            margin-top: 20px;
-        }
-    </style>
+    .table thead {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+</style>
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Halo Admin - SMK Negeri 1 Soreang</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -67,7 +68,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link " href="/about">About</a>
                     </li>
                     <li class="nav-item">
@@ -188,7 +189,8 @@
                                 <!-- Study -->
                                 <div class="mb-3">
                                     <label for="study" class="form-label">Mata pelajaran</label>
-                                    <input type="text" name="study" id="study" class="form-control" required>
+                                    <input type="text" name="study" id="study" class="form-control"
+                                        required>
                                 </div>
 
                                 <!-- User Selection -->
@@ -234,7 +236,8 @@
                                 <!-- Out Time -->
                                 <div class="mb-3">
                                     <label for="out_time" class="form-label">Out Time</label>
-                                    <input type="time" name="out_time" id="out_time" class="form-control" required>
+                                    <input type="time" name="out_time" id="out_time" class="form-control"
+                                        required>
                                 </div>
 
                                 <!-- Submit Button -->
