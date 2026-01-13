@@ -1,39 +1,46 @@
-# Gunakan PHP versi terbaru
-FROM php:8.2-apache
+# Gunakan image PHP 8.2 FPM resmi berbasis Debian
+FROM php:8.2-fpm
 
-# Install dependensi yang dibutuhkan
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
-
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Set working directory
+# Set working directory di dalam container
 WORKDIR /var/www
 
-# Copy project files
+# Install dependensi sistem yang diperlukan
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    libzip-dev \
+    libonig-dev \
+    locales \
+    zip \
+    unzip \
+    git \
+    curl \
+    vim
+
+# Bersihkan cache apt untuk mengurangi ukuran image
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Konfigurasi dan install ekstensi PHP GD
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
+
+# Install ekstensi PHP lainnya yang dibutuhkan Laravel
+RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath
+
+# Ambil Composer versi terbaru dari image resmi
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Salin seluruh kode proyek Laravel ke dalam container
 COPY . /var/www
 
-# Install dependencies
-RUN composer install --no-interaction --optimize-autoloader --no-dev
+# Berikan izin akses (ownership) ke user www-data 
+# agar Laravel bisa menulis log dan cache
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/storage
+# Container akan berjalan di port 9000
+EXPOSE 9000
 
-# Expose port
-EXPOSE 8080
-
-# Start Apache
-CMD ["apache2-foreground"]
+# Jalankan PHP-FPM
+CMD ["php-fpm"]
