@@ -10,7 +10,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = UserModel::all();
+        $users = UserModel::where('role', 'guru')->get();
         return view('users.index', compact('users'));
     }
 
@@ -54,15 +54,11 @@ class UserController extends Controller
         return view('users.show', compact('user'));
     }
 
-    public function edit($id)
-    {
-        $user = UserModel::findOrFail($id);
-        /* check hash
-        dd(Hash::check('123456', '$2y$10$92ySwiotE9bHCZVZGbYX2..MlJ8e7EubcgJgzx2gtG4sD97FQJum.'));
-        */
-
-        return view('users.edit', compact('user'));
-    }
+    // public function edit($id)
+    // {
+    //     $user = UserModel::findOrFail($id);
+    //     return view('users.edit', compact('user'));
+    // }
 
     public function update(Request $request, $id)
     {

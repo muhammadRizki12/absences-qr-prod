@@ -58,42 +58,43 @@
                         <div class="mb-3">
                             <label for="username" class="form-label">Nama Lengkap</label>
                             <input type="text" class="form-control" id="username" name="username" required
-                                placeholder="Enter your username">
+                                placeholder="Masukkan nama lengkap anda">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email" required
-                                placeholder="Enter your email">
+                                placeholder="Masukkan email anda">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jenis Kelamin</label><br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="male" value="male" {{ old('gender') == 'male' ? 'checked' : '' }} required>
+                                <input class="form-check-input" type="radio" name="gender" id="male"
+                                    value="male" {{ old('gender') == 'male' ? 'checked' : '' }} required>
                                 <label class="form-check-label" for="male">Laki - Laki</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="female" value="female" {{ old('gender') == 'female' ? 'checked' : '' }} required>
+                                <input class="form-check-input" type="radio" name="gender" id="female"
+                                    value="female" {{ old('gender') == 'female' ? 'checked' : '' }} required>
                                 <label class="form-check-label" for="female">Perempuan</label>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" name="password" required
-                                placeholder="Enter your password">
+                                placeholder="Masukkan password anda">
                         </div>
                         <div class="mb-3">
-                            <label for="password_confirmation" class="form-label">Confirm Password</label>
+                            <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
                             <input type="password" class="form-control" id="password_confirmation"
-                                name="password_confirmation" required placeholder="Confirm your password">
+                                name="password_confirmation" required placeholder="Konfirmasi password anda">
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-light">Register</button>
                         </div>
                     </form>
 
-                    <p class="text-center mt-3"><small><a href="{{ route('auth.loginForm') }}"
-                                class="text-light">Already have an
-                                account? Login here</a></small></p>
+                    <p class="text-center mt-3"><small><a href="{{ route('auth.loginForm') }}" class="text-light">Sudah
+                                punya akun? Login di sini</a></small></p>
                 </div>
             </div>
         </div>

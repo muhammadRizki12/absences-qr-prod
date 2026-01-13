@@ -1,55 +1,18 @@
-<!-- resources/views/attendance_reports/index.blade.php -->
-<!doctype html>
-<html lang="en">
+@extends('layouts.admin')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Laporan Kehadiran</title>
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
+@section('title', 'Laporan Kehadiran Guru')
 
-        .container {
-            margin-top: 20px;
-        }
+@section('content')
 
-        .table th,
-        .table td {
-            vertical-align: middle;
-        }
-
-        .table thead {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .btn-container {
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Halo Admin - SMK Negeri 1 Soreang</a>
-        </div>
-    </nav>
-
-    <div class="container">
+    <div class="container col-md-10">
         <h3 class="mb-4">Laporan Kehadiran Guru</h3>
 
         <!-- Form Pencarian dan Filter -->
         <form method="GET" action="{{ route('attendance_reports.index') }}">
             <div class="row mb-4">
                 <div class="col-md-3">
-                    <input type="text" class="form-control" name="teacher_name" placeholder="Nama Guru" value="{{ request('teacher_name') }}">
+                    <input type="text" class="form-control" name="teacher_name" placeholder="Nama Guru"
+                        value="{{ request('teacher_name') }}">
                 </div>
                 <div class="col-md-3">
                     <input type="date" class="form-control" name="date" value="{{ request('date') }}">
@@ -58,7 +21,8 @@
                     <select class="form-control" name="status">
                         <option value="">-- Status --</option>
                         <option value="Hadir" {{ request('status') == 'Hadir' ? 'selected' : '' }}>Hadir</option>
-                        <option value="Tidak Hadir" {{ request('status') == 'Tidak Hadir' ? 'selected' : '' }}>Tidak Hadir</option>
+                        <option value="Tidak Hadir" {{ request('status') == 'Tidak Hadir' ? 'selected' : '' }}>Tidak Hadir
+                        </option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -90,11 +54,15 @@
                             <td>{{ $report->status }}</td>
                             <td>
                                 <!-- Form untuk mengedit status -->
-                                <form action="{{ route('attendance_reports.updateStatus', $report->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('attendance_reports.updateStatus', $report->id) }}" method="POST"
+                                    style="display:inline;">
                                     @csrf
-                                    <select name="status" class="form-control form-control-sm" onchange="this.form.submit()">
-                                        <option value="Hadir" {{ $report->status == 'Hadir' ? 'selected' : '' }}>Hadir</option>
-                                        <option value="Tidak Hadir" {{ $report->status == 'Tidak Hadir' ? 'selected' : '' }}>Tidak Hadir</option>
+                                    <select name="status" class="form-control form-control-sm"
+                                        onchange="this.form.submit()">
+                                        <option value="Hadir" {{ $report->status == 'Hadir' ? 'selected' : '' }}>Hadir
+                                        </option>
+                                        <option value="Tidak Hadir"
+                                            {{ $report->status == 'Tidak Hadir' ? 'selected' : '' }}>Tidak Hadir</option>
                                     </select>
                                 </form>
                             </td>
@@ -106,9 +74,4 @@
 
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-</body>
-
-</html>
+@endsection

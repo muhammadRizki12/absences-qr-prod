@@ -47,6 +47,7 @@ Route::middleware(['guru'])->group(function () {
     Route::get('/users/absences/scan-qr', [AbsenceController::class, 'scanQR'])->name('absence.scanQR');
     Route::get('/users/absences/{class_name}', [AbsenceController::class, 'absence'])->name('absence.absence');
     Route::post('/users/absences/{class_name}', [AbsenceController::class, 'store'])->name('absence.store');
+    Route::get('/check-distance', [AbsenceController::class, 'checkDistance'])->name('absence.checkDistance');
 });
 
 // Routes untuk Admin
@@ -60,7 +61,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
     Route::get('/users/{id}', [UserController::class, 'show'])->name('user.show');
     Route::post('/users', [UserController::class, 'store'])->name('user.store');
-    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+
+    // Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('/users/{id}/detail', [UserController::class, 'detail'])->name('user.detail');
+
     Route::patch('/users/{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 

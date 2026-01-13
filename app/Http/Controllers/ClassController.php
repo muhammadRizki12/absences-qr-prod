@@ -24,6 +24,14 @@ class ClassController extends Controller
 
     public function store(Request $request)
     {
+
+        // validate request
+        $request->validate([
+            'class_name' => 'required|unique:classes,class_name|string|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+        ]);
+
         // get params
         $class_name = $request->class_name;
         $latitude = doubleval($request->latitude);

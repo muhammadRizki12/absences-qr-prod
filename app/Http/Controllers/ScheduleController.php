@@ -54,6 +54,54 @@ class ScheduleController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
+        $request->validate([
+            'study' => 'required',
+            'day' => 'required',
+            'entry_time' => 'required',
+            'out_time' => 'required|after:entry_time',
+            'user_id' => 'required|exists:users,id',
+            'class_id' => 'required|exists:classes,id',
+        ]);
+
+        // 1. Cek bentrok kelas: tidak boleh ada jadwal di kelas yang sama pada hari dan jam yang sama
+        $classConflict = ScheduleModel::where('class_id', $request->class_id)
+            ->where('day', $request->day)
+            ->where(function ($query) use ($request) {
+                $query->whereBetween('entry_time', [$request->entry_time, $request->out_time])
+                    ->orWhereBetween('out_time', [$request->entry_time, $request->out_time])
+                    ->orWhere(function ($q) use ($request) {
+                        $q->where('entry_time', '<=', $request->entry_time)
+                          ->where('out_time', '>=', $request->out_time);
+                    });
+            })
+            ->exists();
+
+        if ($classConflict) {
+            return redirect()->route('schedule.create')
+                ->with('error', 'Bentrok! Kelas sudah ada jadwal pada hari dan waktu yang sama.')
+                ->withInput();
+        }
+
+        // 2. Cek bentrok guru: tidak boleh ada guru mengajar di kelas lain pada waktu yang sama
+        $teacherConflict = ScheduleModel::where('user_id', $request->user_id)
+            ->where('day', $request->day)
+            ->where(function ($query) use ($request) {
+                $query->whereBetween('entry_time', [$request->entry_time, $request->out_time])
+                    ->orWhereBetween('out_time', [$request->entry_time, $request->out_time])
+                    ->orWhere(function ($q) use ($request) {
+                        $q->where('entry_time', '<=', $request->entry_time)
+                          ->where('out_time', '>=', $request->out_time);
+                    });
+            })
+            ->exists();
+
+        if ($teacherConflict) {
+            return redirect()->route('schedule.create')
+                ->with('error', 'Bentrok! Guru sudah mengajar di kelas lain pada hari dan waktu yang sama.')
+                ->withInput();
+        }
+
         $schedule = ScheduleModel::create([
             'study' => $request->study,
             'day' => $request->day,
@@ -64,10 +112,10 @@ class ScheduleController extends Controller
         ]);
 
         // if failed
-        if (!$schedule) return redirect()->route('schedule.create')->with('msg', 'Schedule insert failed!');
+        if (!$schedule) return redirect()->route('schedule.create')->with('error', 'Schedule insert failed!');
 
         // Return data schedule sebagai respons JSON
-        return redirect()->route('schedule.index')->with('msg', 'Schedule insert successfully.');
+        return redirect()->route('schedule.index')->with('success', 'Schedule insert successfully.');
     }
 
     public function edit($id)
@@ -82,14 +130,64 @@ class ScheduleController extends Controller
     {
         $schedule = ScheduleModel::findOrFail($id);
 
+        // Validasi input
+        $request->validate([
+            'study' => 'required',
+            'day' => 'required',
+            'entry_time' => 'required',
+            'out_time' => 'required|after:entry_time',
+            'user_id' => 'required|exists:users,id',
+            'class_id' => 'required|exists:classes,id',
+        ]);
+
+        // 1. Cek bentrok kelas (kecuali schedule yang sedang diedit)
+        $classConflict = ScheduleModel::where('class_id', $request->class_id)
+            ->where('day', $request->day)
+            ->where('id', '!=', $id) // Exclude current schedule
+            ->where(function ($query) use ($request) {
+                $query->whereBetween('entry_time', [$request->entry_time, $request->out_time])
+                    ->orWhereBetween('out_time', [$request->entry_time, $request->out_time])
+                    ->orWhere(function ($q) use ($request) {
+                        $q->where('entry_time', '<=', $request->entry_time)
+                          ->where('out_time', '>=', $request->out_time);
+                    });
+            })
+            ->exists();
+
+        if ($classConflict) {
+            return redirect()->route('schedule.edit', $id)
+                ->with('error', 'Bentrok! Kelas sudah ada jadwal pada hari dan waktu yang sama.')
+                ->withInput();
+        }
+
+        // 2. Cek bentrok guru (kecuali schedule yang sedang diedit)
+        $teacherConflict = ScheduleModel::where('user_id', $request->user_id)
+            ->where('day', $request->day)
+            ->where('id', '!=', $id) // Exclude current schedule
+            ->where(function ($query) use ($request) {
+                $query->whereBetween('entry_time', [$request->entry_time, $request->out_time])
+                    ->orWhereBetween('out_time', [$request->entry_time, $request->out_time])
+                    ->orWhere(function ($q) use ($request) {
+                        $q->where('entry_time', '<=', $request->entry_time)
+                          ->where('out_time', '>=', $request->out_time);
+                    });
+            })
+            ->exists();
+
+        if ($teacherConflict) {
+            return redirect()->route('schedule.edit', $id)
+                ->with('error', 'Bentrok! Guru sudah mengajar di kelas lain pada hari dan waktu yang sama.')
+                ->withInput();
+        }
+
         $data = $request->all();
 
         // update data
         $updateSchedule = $schedule->update($data);
 
-        if (!$updateSchedule) return redirect()->route('schedule.edit')->with('msg', 'Schedule update failed!');
+        if (!$updateSchedule) return redirect()->route('schedule.edit')->with('error', 'Schedule update failed!');
 
-        return redirect()->route('schedule.index')->with('msg', 'Schedule updated successfully.');
+        return redirect()->route('schedule.index')->with('success', 'Schedule updated successfully.');
     }
 
     public function destroy($id)

@@ -1,258 +1,158 @@
-<!doctype html>
-<html lang="en">
+@extends('layouts.admin')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Data Guru</title>
-    <style>
-         /* Styling untuk sidebar */
-         .bg-sidebar {
-            background-color:#0d6efd;
-            color: white;
-            padding: 20px;
-        }
+@section('title', 'Data Kelas')
 
-        /* Styling untuk link di sidebar */
-        .bg-sidebar .nav-link {
-            color: white;
-        }
-        body {
-            background-color: #f8f9fa;
-        }
 
-        .container {
-            margin-top: 20px;
-        }
 
-        .btn-container {
-            text-align: right;
-            margin-bottom: 20px;
-        }
+@section('content')
+    <div class="container col-md-10">
+        <h3 class="mb-4">Kelas</h3>
 
-        .btn-icon {
-            padding: 5px 10px;
-            font-size: 18px;
-        }
+        {{-- Alert Component - handles all message types --}}
+        <x-alert />
 
-        table th,
-        table td {
-            vertical-align: middle;
-        }
+        <div class="text-end mb-3">
 
-        .table thead {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .table-responsive {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-
-<body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Halo Admin - SMK Negeri 1 Soreang</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addClassModal">
+                <i class="fas fa-plus"></i> Tambah Kelas
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link " href="/about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard/dashboardadmin">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/users">Data Guru</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/classes">Kelas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/schedules">Jadwal</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/absences">Laporan Kehadiran</a>
-                    </li>
-                    <!-- Tombol Logout -->
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-danger text-white" href="{{ route('auth.logout') }}">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
+
         </div>
-    </nav>
 
-    <div class="container-fluid">
-        <div class="row">
+        <table class="table text-center table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama Kelas</th>
+                    <th scope="col">Koordinat</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                @foreach ($classes as $class)
+                    <tr>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ $class->class_name }}</td>
+                        <td>{{ $class->latitude }}, {{ $class->longitude }}</td>
+                        <td>
+                            <a href="{{ route('class.edit', $class->id) }}" class="btn btn-warning btn-sm" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
 
-            <!-- Sidebar -->
-            <div class="col-md-3 bg-sidebar p-3 d-none d-md-block">
+                            <form action="{{ route('class.destroy', $class->id) }}" method="POST" style="display:inline;"
+                                onsubmit="return confirm('Are you sure you want to delete this class?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
 
-                <h5>HOME</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard/dashboardadmin">Dashboard</a>
-                    </li>
-                </ul>
+                            <a href="{{ route('class.downloadQrCode', $class->class_name) }}" class="btn btn-primary btn-sm"
+                                title="Detail">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
-                <h5>ADMIN</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/users">Data Guru</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/classes">Kelas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/schedules">Jadwal</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/absences">Laporan Kehadiran</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                </ul>
-            </div>
+    {{-- Modal add classes --}}
+    <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('class.store') }}" method="POST">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="addClassModalLabel">Tambah Kelas</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
 
-            <!-- Main Content -->
-            <div class="col-12 col-md-9">
-                <div class="container">
-                    <h3 class="mb-4">Kelas</h3>
 
-                    @if (session('msg'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{{ session('msg') }}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
+                        @csrf
+                        <div class="mb-3">
+                            <label for="class_name" class="form-label">Nama Kelas</label>
+                            <input type="text" class="form-control" id="class_name" name="class_name"
+                                placeholder="Masukkan nama kelas" required>
                         </div>
-                    @endif
 
-                    <!-- Tombol "Tambah Kelas" di atas tabel -->
-                    <div class="btn-container">
-                        <a href="{{ route('class.create') }}" class="btn btn-success">
-                            <i class="fas fa-plus"></i> Tambah Kelas
-                        </a>
+                        <div>
+                            <label class="form-label d-block">Lokasi Kelas</label>
+                            <button type="button" class="btn btn-outline-success btn-sm mb-3" onclick="getLocation()">
+                                <i class="bi bi-geo-alt"></i> Ambil Lokasi Saat Ini
+                            </button>
+                            <small id="locationStatus" class="text-muted d-block mb-2"></small>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="latitude" class="form-label">Latitude</label>
+                                    <input type="text" class="form-control" id="latitude" name="latitude"
+                                        placeholder="-6.12345" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="longitude" class="form-label">Longitude</label>
+                                    <input type="text" class="form-control" id="longitude" name="longitude"
+                                        placeholder="106.12345" required>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
-
-                    <!-- Tabel Data Kelas -->
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Nama Kelas</th>
-                                    {{-- <th scope="col">Latitude</th>
-                                    <th scope="col">Longitude</th> --}}
-                                    <th scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($classes as $class)
-                                    <tr>
-                                        <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $class->class_name }}</td>
-                                        {{-- <td>{{ $class->latitude }}</td>
-                                        <td>{{ $class->longitude }}</td> --}}
-                                        <td>
-                                            <!-- Tombol Detail (ikon mata) -->
-                                            <a href="{{ route('class.show', $class->id) }}"
-                                                class="btn btn-primary btn-sm btn-icon" title="Detail">
-                                                <i class="fas fa-eye"></i> Detail
-                                            </a>
-
-                                            <!-- Tombol Edit (ikon pensil) -->
-                                            <a href="{{ route('class.edit', $class->id) }}"
-                                                class="btn btn-warning btn-sm btn-icon" title="Edit">
-                                                <i class="fas fa-edit"></i> Edit
-                                            </a>
-
-                                            <form action="{{ route('class.destroy', $class->id) }}" method="POST"
-                                                style="display:inline;"
-                                                onsubmit="return confirm('Are you sure you want to delete this class?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
-
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                     </div>
-
-                </div>
+                </form>
             </div>
-
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-</body>
+    <script>
+        function getLocation() {
+            const status = document.getElementById('locationStatus');
+            const latInput = document.getElementById('latitude');
+            const lngInput = document.getElementById('longitude');
 
-</html>
+            if (!navigator.geolocation) {
+                status.textContent = "Browser Anda tidak mendukung fitur lokasi.";
+                return;
+            }
+
+            status.textContent = "Sedang mengambil lokasi...";
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    latInput.value = lat;
+                    lngInput.value = lng;
+                    status.textContent = "Lokasi berhasil diperbarui!";
+                    status.className = "text-success d-block mb-2";
+                },
+                (error) => {
+                    status.className = "text-danger d-block mb-2";
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            status.textContent = "Pengguna menolak permintaan lokasi.";
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            status.textContent = "Informasi lokasi tidak tersedia.";
+                            break;
+                        case error.TIMEOUT:
+                            status.textContent = "Waktu permintaan lokasi habis.";
+                            break;
+                        default:
+                            status.textContent = "Terjadi kesalahan yang tidak diketahui.";
+                            break;
+                    }
+                }
+            );
+        }
+    </script>
+@endsection

@@ -162,16 +162,13 @@ class AbsenceController extends Controller
         return view('absences.absence', compact('class_name'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $class_name)
     {
-        // Validasi data
+        // Validasi hanya latitude dan longitude
         $validated = $request->validate([
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-            'class_name' => 'required'
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
         ]);
-
-        $class_name = $request->class_name;
 
         // Ambil data koordinat kelas berdasarkan nama kelas
         $class = ClassModel::where('class_name', $class_name)->first();
@@ -188,28 +185,18 @@ class AbsenceController extends Controller
         $latitudeCurrent = $request->latitude;
         $longitudeCurrent = $request->longitude;
 
-        // Koordinat lokasi kelas (dari database)
-        // -7.009443254448746, 107.55150421608026
-        // -6.946593,107.593823
-        $latitudeClass = -7.036147;
-        $longitudeClass = 107.535459;
-        // $longitudeClass = doubleval($class->longitude);
-        // $latitudeClass = doubleval($class->latitude);
+        // $latitudeClass = -7.009144;
+        // $longitudeClass = 107.551723;
+
+        $longitudeClass = $class->longitude;
+        $latitudeClass = $class->latitude;
 
         // Fungsi untuk menghitung jarak
         $distance = $this->distance($latitudeClass, $longitudeClass, $latitudeCurrent, $longitudeCurrent);
 
-        // test
-        // dd("
-        // latitude current: $latitudeCurrent\n
-        // longitude current: $longitudeCurrent\n
-        // latitude class: $latitudeClass\n
-        // longitude class: $longitudeClass\n
-        // radius: $distance
-        // ");
-
         if ($distance >= 300) {
             return response()->json([
+                'distance' => $distance,
                 'message' => 'Anda di luar jangkauan!',
                 'redirect_url' => '/users/absences/scan-qr',
             ], 400);
@@ -248,7 +235,7 @@ class AbsenceController extends Controller
         $checkAbsence = AbsenceModel::where('schedule_id', $schedule->id)->get();
         $checkAbsenceCount = $checkAbsence->count();
 
-        if ($checkAbsenceCount > 1) {
+        if ($checkAbsenceCount >= 1) {
             return response()->json([
                 'message' => 'Sudah absen!',
                 'redirect_url' => '/users/absences',
@@ -268,7 +255,10 @@ class AbsenceController extends Controller
         // validation absence time
         if ($currentTime->lt($entryTime)) {
             // absent before time
-            return "Belum waktunya absen";
+            return response()->json([
+                'message' => 'Belum waktunya absen',
+                'redirect_url' => '/users/absences/scan-qr',
+            ], 400);
         } else if ($currentTime->between($entryTime, $entryTimePlus30)) {
             // ontime (30 minute after entry_time)
             $status = 'Hadir';
@@ -313,6 +303,7 @@ class AbsenceController extends Controller
     {
         $latitude1 = -7.0361470;
         $longitude1 = 107.5354590;
+
 
         // location user
         $latitude2 = -7.009116810755372;

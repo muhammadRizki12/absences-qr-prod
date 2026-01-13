@@ -12,6 +12,8 @@ class GuruMiddleware
     {
         if (Auth::check() && Auth::user()->role == 'guru') {
             return $next($request);
+        } else if (Auth::user()->role == 'admin') {
+            abort(403, 'Unauthorized access.');
         }
 
         return redirect()->route('auth.login')->with('msg', 'Anda belum login!');
