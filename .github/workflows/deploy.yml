@@ -26,10 +26,10 @@ jobs:
             git pull origin main
 
             # 2. Build ulang image dan jalankan container
-            docker-compose up -d --build
+            docker compose up -d --build
 
             # 3. Jalankan perintah Laravel di dalam container
-            docker-compose exec -T app composer install --no-dev --optimize-autoloader
-            docker-compose exec -T app php artisan migrate --force
-            docker-compose exec -T app php artisan config:cache
-            docker-compose exec -T app php artisan route:cache
+            docker compose exec -T app composer install --no-dev --optimize-autoloader
+            docker compose exec -T app php artisan migrate --force
+            docker compose exec -T app php artisan config:cache
+            docker compose exec -T app php artisan route:cache
