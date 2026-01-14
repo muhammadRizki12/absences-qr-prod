@@ -22,14 +22,16 @@ jobs:
           script: |
             cd /var/www/absences-qr-prod
 
-            # 1. Ambil kode terbaru
-            git pull origin main
+            # 1. Pastikan container lama mati dan bersih sebelum build baru
+            docker compose down --remove-orphans
 
-            # 2. Build ulang image dan jalankan container
+            # 2. Build dan jalankan
             docker compose up -d --build
 
-            # 3. Jalankan perintah Laravel di dalam container
+            # 3. Tunggu beberapa detik agar database siap sebelum migrasi
+            sleep 10
+
+            # 4. Jalankan perintah Laravel
             docker compose exec -T app composer install --no-dev --optimize-autoloader
             docker compose exec -T app php artisan migrate --force
             docker compose exec -T app php artisan config:cache
-            docker compose exec -T app php artisan route:cache
