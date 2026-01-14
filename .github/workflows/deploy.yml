@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www/absences-qr
+            cd /var/www/absences-qr-prod
 
             # 1. Ambil kode terbaru
             git pull origin main
