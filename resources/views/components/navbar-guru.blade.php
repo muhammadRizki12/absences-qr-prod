@@ -1,11 +1,47 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Halo Guru</a>
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-chalkboard-teacher"></i> Guru
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Mobile Menu (visible only on mobile) -->
+            <ul class="navbar-nav me-auto d-lg-none">
+                <li class="nav-item">
+                    <h6 class="navbar-text text-white-50 mt-2 mb-1 px-3">HOME</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard-guru">
+                        <i class="fas fa-chart-line"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <h6 class="navbar-text text-white-50 mt-3 mb-1 px-3">MENU</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/absences/scan-qr">
+                        <i class="fas fa-qrcode"></i> Scan QR Absensi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/absences">
+                        <i class="fas fa-clipboard-list"></i> Data Kehadiran
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/schedules">
+                        <i class="fas fa-calendar-alt"></i> Jadwal
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <hr class="dropdown-divider bg-secondary">
+                </li>
+            </ul>
+
+            <!-- Logout Button (always visible) -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="btn btn-danger btn-sm text-white" href="{{ route('auth.logout') }}">
